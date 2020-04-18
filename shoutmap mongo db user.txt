@@ -1,0 +1,6 @@
+user
+shoutmapadmin
+shoutmappass
+
+connection string:
+mongodb+srv://shoutmapadmin:shoutmappass@cluster0-mkagc.mongodb.net/shoutmap?retryWrites=true&w=majority

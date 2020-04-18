@@ -7,12 +7,16 @@ import { IonContent, IonHeader, IonFabButton, IonInput, IonPage, IonTitle, IonTo
 import ExploreContainer from '../components/ExploreContainer';
 import { useFirebase } from '../hooks/useFirebase';
 import './Tab1.css';
+import { useShout } from '../hooks/useShout';
+
 
 const Tab1: React.FC = () => {
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const { userLogin, userLogout, userCreate } = useFirebase();
+  const { shoutPost, shoutRead } = useShout();
+
 
   return (
     <IonPage>
@@ -35,6 +39,9 @@ const Tab1: React.FC = () => {
         <IonButton onClick={() => userCreate(email, password)}>Create user</IonButton>
 
         </p>        
+        <p>
+        {shoutPost.words}
+        </p>
 
 
 
