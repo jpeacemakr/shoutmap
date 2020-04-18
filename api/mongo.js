@@ -23,14 +23,14 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 
 //returns all people
-app.get("/hello", async (request, response) => {
+app.get("/api/hello", async (request, response) => {
     response.send("Hello world!");
 });
 
 
 
 //adds a new shout
-app.post("/newshout", async (request, response) => {
+app.post("/api/newshout", async (request, response) => {
     try {
         var shout = new ShoutModel(request.body);
         var result = await shout.save();
@@ -43,7 +43,7 @@ app.post("/newshout", async (request, response) => {
 
 
 //returns all people
-app.get("/allshouts", async (request, response) => {
+app.get("/api/allshouts", async (request, response) => {
     try {
         var result = await ShoutModel.find().exec();
         response.send(result);

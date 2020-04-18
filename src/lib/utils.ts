@@ -54,7 +54,7 @@ export function createShout(shout_info:any) {
   
   console.log(searchParams);  
 
-  return fetch("http://localhost:3000/api/newshout", {
+  return fetch("/api/newshout", {
     method: "POST",
     headers: header,
     body: searchParams
