@@ -16,16 +16,18 @@ export function useFirebase() {
 
   const userCreate = async (email:any, password:any) => {
 	firebase.auth().createUserWithEmailAndPassword(email, password)
-	.then (resp=>{ console.log(resp); },err=>{ console.log(err); })
+	.then (resp=>{ console.log(resp, firebase.auth().currentUser); },err=>{ console.log(err); })
 
   };
 
 
+  const logUser = () => { console.log(firebase.auth().currentUser); };
 
 
   return {
     userLogin,
     userLogout,
+    logUser, 
     userCreate
   };
 }

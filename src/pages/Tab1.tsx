@@ -14,7 +14,7 @@ const Tab1: React.FC = () => {
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const { userLogin, userLogout, userCreate } = useFirebase();
+  const { userLogin, userLogout, userCreate, logUser } = useFirebase();
   const { shoutPost, shoutRead } = useShout();
 
 
@@ -22,7 +22,7 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar  color="primary">
-          <IonTitle>Log in/Log out</IonTitle>
+          <IonTitle>Log in/Log out {email}</IonTitle>
         </IonToolbar>
       </IonHeader>
 

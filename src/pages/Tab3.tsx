@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState } from 'react';
+
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
@@ -11,13 +13,14 @@ import { createShout } from '../lib/utils';
 const Tab3: React.FC = () => {
 
   const { shoutPost, shoutRead } = useShout();
+  const [email, setEmail] = useState<string>();
 
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle>Tweet your location</IonTitle>
+          <IonTitle>Shout your location {email}</IonTitle>
         </IonToolbar>
       </IonHeader>
       
@@ -32,7 +35,7 @@ const Tab3: React.FC = () => {
       <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
                
           <textarea rows={5} style={{width:"100%"}} />
-          <IonButton onClick={() => createShout({username:"jpeacemakr@yahoo.com"})}>TWEET YOUR LOCATION</IonButton>
+          <IonButton onClick={() => createShout({username:"jpeacemakr@yahoo.com"})}>SHOUT YOUR LOCATION</IonButton>
        
       </IonFooter>
 
