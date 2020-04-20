@@ -14,6 +14,10 @@ import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
 import { useShout } from '../hooks/useShout';
 import { useFirebase } from '../hooks/useFirebase';
 
+//needed for map function to work
+import { map } from 'rxjs/operators';
+
+
 
 
 /*
@@ -63,7 +67,7 @@ const Tab2: React.FC = () => {
 
   const { userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
 
-  const { shoutPost, shoutRead, getShouttextlist } = useShout();
+  const { shoutPost, shoutRead, getShouttextlist, getShoutlist } = useShout();
 
 
 
@@ -86,6 +90,65 @@ const Tab2: React.FC = () => {
 
 
 
+
+  function displayShouts ()
+    {
+      
+      let currentShoutList = getShoutlist();
+      let currentShoutTextList = getShouttextlist();
+
+      console.log("currentShoutList in displayShouts", currentShoutList);
+      console.log("currentShoutTextList in displayShouts", currentShoutTextList);
+
+      
+
+/*
+      if (currentShoutList == undefined ) {
+        console.log("shoutlist is null");
+        return;
+
+      } else {
+        let superList = "<tr><th>Email</th></tr>";
+
+        /*
+        for (const currentSupersearch of currentShoutList){
+              superList = superList + "<tr><td>" + currentSupersearch.username + "</td></tr>";
+        }*/
+
+        //return superList;
+        //converts html string to jsx
+  //      return(<><table className="container" dangerouslySetInnerHTML={{__html: superList}}></table></>);
+  //    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  interface Shout {
+    _id: string;
+    username: string;
+    longitude: number;
+    latitude: number;
+    shouttext: string;
+    date: string;
+    time: string;
+  }*/
+
+
   return (
     <IonPage>
       <IonHeader>
@@ -97,11 +160,25 @@ const Tab2: React.FC = () => {
       <IonContent>
 
 
-          <p>
+           <p>
            { getShouttextlist() }
+           </p>
+           
+           { getShoutlist() ?
+
+              <>{ displayShouts() }
+
+              <ul>{ getShoutlist().map((item:any) => (<li key={item._id}> Email {item.username}</li>)) }</ul>
+
+              </>
+
+          : 
+
+            <p>Click button to load shouts near you!</p>
+          }
            
 
-         </p>
+         
 
          <IonButton onClick={() => logUser()}>Log the user to the console</IonButton>
          <IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>

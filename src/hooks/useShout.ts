@@ -7,28 +7,36 @@ require("isomorphic-fetch");
 
 export function useShout() {
 
-  const [shoutlist, setShoutlist] = useState();
-  const [shoutlisttext, setShoutlisttext] = useState();
+  var [shoutlist, setShoutlist] = useState();
+  var [shoutlisttext, setShoutlisttext] = useState();
 
 
 
 
   const shoutRead = async (longValue:any, latValue:any, distanceValue:any) => {
     var url = `http://localhost/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
-    var shoutText;
+    var shoutText = " ";
 
-    setShoutlist(fetch(url)
+    var shoutToReturn = await fetch(url)
     .then(resp=>{ console.log("FETCHING", "URL", url, "resp", resp); return resp.json(); }, err=>{ console.log(err); })
+
     .then((responseJSON) => {
         console.log("responseJSON", responseJSON);
+
         shoutText = JSON.stringify(responseJSON);
         console.log("shoutText", shoutText);
-        setShoutlisttext(shoutText);
+    
+        shoutlisttext = setShoutlisttext(shoutText);
+        
+        shoutlist = setShoutlist(responseJSON);
+  
+      }).then(() => {
+
         console.log("shoutlisttext", shoutlisttext);
-        return responseJSON;
+        console.log("shoutlist", shoutlist);
 
-    }));
-
+      });
+  
   };
 
 
@@ -37,6 +45,10 @@ export function useShout() {
     return shoutlisttext;
   };
 
+
+  const getShoutlist = () => {
+    return shoutlist;
+  };
 
 
 
@@ -51,7 +63,8 @@ export function useShout() {
 
   return {
     shoutPost,
-    shoutRead, 
+    shoutRead,
+    getShoutlist, 
     getShouttextlist
   };
 }
