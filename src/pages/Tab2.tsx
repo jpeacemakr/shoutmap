@@ -1,7 +1,7 @@
 //import React from 'react';
 //import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
@@ -63,13 +63,7 @@ const Tab2: React.FC = () => {
 
   const { userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
 
-  const { shoutPost, shoutRead } = useShout();
-  const [longitude, setLongitude] = useState<number>();
-  const [latitude, setLatitude] = useState<number>();
-  const [date, setDate] = useState<string>();
-  const [time, setTime] = useState<string>();
-  const [shouttext, setShouttext] = useState<string>();
-  const [shoutlist, setShoutlist] = useState<string>();
+  const { shoutPost, shoutRead, getShouttextlist } = useShout();
 
 
 
@@ -83,9 +77,14 @@ const Tab2: React.FC = () => {
   }
 
 
+  //loads the json from the api. Can't do this in main render or I get an error.
+  useEffect(() => {
+    console.log("Using effect. Running shoutRead.")
+    //shoutRead(0,0,0);
+  });
 
-  shoutRead(0,0,0);
-  
+
+
 
   return (
     <IonPage>
@@ -99,13 +98,16 @@ const Tab2: React.FC = () => {
 
 
           <p>
-           { }
+           { getShouttextlist() }
            
 
          </p>
 
          <IonButton onClick={() => logUser()}>Log the user to the console</IonButton>
          <IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>
+         <IonButton onClick={() => shoutRead(0,0,0)}>Load shouts</IonButton>
+
+
 
 
 
