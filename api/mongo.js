@@ -54,6 +54,25 @@ app.get("/api/allshouts", async (request, response) => {
 
 
 
+//returns shouts within certain distance
+app.get("/api/getshouts", async (request, response) => {
+
+    const longitude = req.query.longitude;
+    const latitude = req.query.latitude;
+    const distance = req.query.distance;
+    
+
+    try {
+        var result = await ShoutModel.find().exec();
+        response.send(result);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});
+
+
+
+
 //finds a specific person
 /*
 app.get("/shoutuser/:id", async (request, response) => {

@@ -1,40 +1,45 @@
 import * as firebase from 'firebase';
+import React, { useState } from 'react';
+require("isomorphic-fetch");
+
+
+
 
 export function useShout() {
 
-  const shoutLogin = async (email:any, password:any) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(resp=>{ console.log(resp); },err=>{ console.log(err); })
+  const [shoutlist, setShoutlist] = useState();
+
+
+
+
+  
+
+
+  const shoutRead = async (longValue:any, latValue:any, distanceValue:any) => {
+    var url = `http://localhost/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
+    
+    setShoutlist(fetch(url)
+    .then(resp=>{ console.log("FETCHING", "URL", url, "resp", resp); return resp.json(); }, err=>{ console.log(err); })
+    .then((responseJSON) => {
+        console.log("responseJSON", responseJSON);
+        
+        return responseJSON;
+    }));
+
   };
 
-  
-  const shoutLogout = async () => {
-    firebase.auth().signOut().then (resp=>{ console.log(resp); },err=>{ console.log(err); })
-  };
 
 
-  const shoutPost = {
-
-    words: "Here are some posts."
-
-
-
-  };
-
-
-
-  const shoutRead = {
-
-    words: "Here are some posts."
-
+  const shoutPost = async (longValue:any, latValue:any, distanceValue:any) => {
+    var url = `http://localhost/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
+    fetch(url)
+    .then(resp=>{ console.log(url,resp); }, err=>{ console.log(err); })
   };
 
 
 
 
   return {
-    shoutLogin,
-    shoutLogout,
     shoutPost,
     shoutRead
   };

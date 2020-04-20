@@ -7,7 +7,6 @@ import './Tab3.css';
 import { useShout } from '../hooks/useShout';
 import { createShout } from '../lib/utils';
 
-//var Shout = require('../lib/utils');
 
 
 const Tab3: React.FC = () => {

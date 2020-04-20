@@ -75,12 +75,12 @@ const App: React.FC = () => (
           
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon icon={search} />
-            <IonLabel>Tweets near you</IonLabel>
+            <IonLabel>Shouts near you</IonLabel>
           </IonTabButton>
           
           <IonTabButton tab="tab3" href="/tab3">
             <IonIcon icon={create} />
-            <IonLabel>Tweet your location</IonLabel>
+            <IonLabel>Shout your location</IonLabel>
           </IonTabButton>
         
         </IonTabBar>
