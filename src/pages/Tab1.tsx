@@ -1,13 +1,9 @@
 import React from 'react';
-//import { useState } from 'react';
-
 import { IonContent, IonHeader, IonFabButton, IonInput, IonPage, IonTitle, IonToolbar, IonMenu, IonList, IonItem, IonRouterOutlet,  IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonSearchbar, IonButton, IonFooter } from '@ionic/react';
-
-//import { IonContent, IonHeader,  IonPage, IonTitle, IonToolbar } from '@ionic/react';
-
 import ExploreContainer from '../components/ExploreContainer';
 import { useFirebase } from '../hooks/useFirebase';
 import './Tab1.css';
+
 import { useShout } from '../hooks/useShout';
 
 
@@ -17,12 +13,10 @@ const Tab1: React.FC = () => {
   //const { shoutPost, shoutRead } = useShout();
 
   
-
+  //used for testing purposes only
   function logUserOnPush () {
-
     console.log(getEmail());
     return 1;
-
   }
 
 
@@ -54,14 +48,11 @@ const Tab1: React.FC = () => {
 
         </div>        
 
-        <IonButton onClick={() => logUser()}>Log the user to the console</IonButton>
-        <IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>
+        {/*<IonButton onClick={() => logUser()}>Log the user to the console</IonButton>*/}
+        {/*<IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>*/}
 
 
       </IonContent>
-
-
-
 
     </IonPage>
   );

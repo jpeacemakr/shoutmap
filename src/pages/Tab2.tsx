@@ -72,18 +72,16 @@ const Tab2: React.FC = () => {
 
 
 
-
+  //logs user email to console. for testing only.
   function logUserOnPush () {
-
     console.log(getEmail());
     return 1;
-
   }
 
 
 
 
-
+  //logs shout list to console. for testing only.
   function displayShouts ()
     {
       
@@ -92,12 +90,7 @@ const Tab2: React.FC = () => {
 
       console.log("currentShoutList in displayShouts", currentShoutList);
       console.log("currentShoutTextList in displayShouts", currentShoutTextList);
-
-    
     }
-
-
-
 
 
 
@@ -112,8 +105,9 @@ const Tab2: React.FC = () => {
 
       <IonContent>
 
-         <IonButton onClick={() => logUser()}>Log the user to the console</IonButton>
-         <IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>
+         {/*<IonButton onClick={() => logUser()}>Log the user to the console</IonButton>*/}
+         {/*<IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>*/}
+
          <IonButton onClick={() => shoutRead(0,0,0)}>Load shouts</IonButton>
 
            <p>
@@ -134,17 +128,8 @@ const Tab2: React.FC = () => {
           }
            
 
-         
-
-
-
-
-
 
       </IonContent>
-
-
-
 
     </IonPage>
   );

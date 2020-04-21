@@ -7,17 +7,14 @@ import './Tab3.css';
 
 import { useFirebase } from '../hooks/useFirebase';
 import { useShout } from '../hooks/useShout';
-//import { useGPS } from '../hooks/useGPS';
-
 
 
 
 const Tab3: React.FC = () => {
 
-  const { shouttext, getShouttext, createShout, setShouttext } = useShout();
+  const { shouttext, getShouttext, createShout, setShouttext, createShoutGPS } = useShout();
   const { getUser, getEmail } = useFirebase();
   //const { getGPSlongitude, getGPSlatitude, newGPS } = useGPS();
-
 
   return (
     <IonPage>
@@ -43,8 +40,11 @@ const Tab3: React.FC = () => {
           <IonTextarea rows={8} value={shouttext} placeholder='Type your shout here.' onIonChange={e => setShouttext(e.detail.value!)} ></IonTextarea>
 
 
-          <IonButton onClick={() => createShout({username:getEmail(), shouttext:shouttext, longitude: -1.2323, latitude: 1.98774 })}>SHOUT YOUR LOCATION</IonButton>
+          {/*<IonButton onClick={() => createShout({username:getEmail(), shouttext:shouttext, longitude: -1.2323, latitude: 1.98774 })}>SHOUT YOUR FAKE LOCATION</IonButton>*/}
        
+          <IonButton onClick={() => createShoutGPS(shouttext)}>SHOUT YOUR LOCATION</IonButton>
+
+
       </IonFooter>
 
 
