@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, 
+import { IonButton, IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, 
          IonFab, IonFabButton, IonIcon, IonGrid, IonRow, 
          IonCol, IonImg, IonActionSheet } from '@ionic/react';
 
@@ -19,57 +19,10 @@ import { map } from 'rxjs/operators';
 
 
 
-
-/*
-function listShouts() {
-
-      //username, date, time, longitude, latitude, shouttext
-      
-      //shoutPost(0,0,0)
-
-      var shoutData = await getShoutData(0,0,0);
-      var shoutString = JSON.stringify(shoutData);
-
-      
-      
-
-      if (shoutData) {
-
-        console.log("shoutData:");
-        console.log(shoutData);
-
-        console.log("shoutString:");
-        console.log(shoutString);
-
-
-        return (
-            <ul>
-              <li>shoutData is found. check console</li>
-              <li>{shoutString}</li>
-
-            </ul>
-        )
-        
-
-      } else {
-        return <p>No shouts available.</p>;
-      }
-
-  }
-*/
-
-
-
-
 const Tab2: React.FC = () => {
 
-
-
   const { userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
-
   const { shoutRead, getShouttextlist, getShoutlist } = useShout();
-
-
 
 
   //logs user email to console. for testing only.
@@ -77,7 +30,6 @@ const Tab2: React.FC = () => {
     console.log(getEmail());
     return 1;
   }
-
 
 
 
@@ -94,42 +46,68 @@ const Tab2: React.FC = () => {
 
 
 
-
   return (
     <IonPage>
+
       <IonHeader>
+
         <IonToolbar  color="primary">
-          <IonTitle>Shouts near you {getEmail()}</IonTitle>
+          <IonTitle>Shouts near you: {getEmail()}</IonTitle>
         </IonToolbar>
+
       </IonHeader>
 
+
+
       <IonContent>
+
+        <div style={{ padding:"15px", margin:"15px" }}>
 
          {/*<IonButton onClick={() => logUser()}>Log the user to the console</IonButton>*/}
          {/*<IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>*/}
 
-         <IonButton onClick={() => shoutRead(0,0,0)}>Load shouts</IonButton>
-
            <p>
-           { getShouttextlist() }
+           {/* getShouttextlist() */}
            </p>
            
-           { getShoutlist() ?
+           { 
 
-              <>{ displayShouts() }
+            getShoutlist() ?
 
-              <ul>{ getShoutlist().map((item:any) => (<li key={item._id}> Email {item.username}</li>)) }</ul>
+              <>{/* displayShouts() */}
+  
+              <p>Click the "Load Shouts" button below to refresh the list.</p>
+
+              <ul>{ getShoutlist().map((item:any) => 
+                (<li key={item._id}> 
+                <b>{item.username}:</b>  
+                <i>(longitude: {item.longitude},  
+                latitude: {item.latitude}, 
+                {item.time} {item.date}):</i><br /> 
+                {item.shouttext} 
+                </li>)) }</ul>
 
               </>
 
           : 
 
-            <p>Click button to load shouts near you!</p>
+            <p>Click "Load Shouts" button below to see what's happening near you.</p>
+          
           }
            
-
+        </div>
 
       </IonContent>
+
+
+      <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
+
+         <IonButton onClick={() => shoutRead(0,0,0)}>Load shouts</IonButton>
+
+      </IonFooter>
+
+
+
 
     </IonPage>
   );

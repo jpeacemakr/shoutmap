@@ -18,35 +18,37 @@ const Tab3: React.FC = () => {
 
   return (
     <IonPage>
+
       <IonHeader>
+
         <IonToolbar color="primary">
-          <IonTitle>Shout your location {getEmail()}</IonTitle>
+          <IonTitle>Shout your location: {getEmail()}</IonTitle>
         </IonToolbar>
+
       </IonHeader>
       
 
       <IonContent>
         
+        <div style={{ padding:"15px", margin:"15px" }}>
 
-
-
-      </IonContent>
-
-      <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
-          
-     
           {/*<IonInput value={getShouttext()} placeholder='Type your shout here.' type='text' onIonChange={e => setShouttext(e.detail.value!)} ></IonInput>*/}
 
           <IonTextarea rows={8} value={shouttext} placeholder='Type your shout here.' onIonChange={e => setShouttext(e.detail.value!)} ></IonTextarea>
 
+        </div>
 
+      </IonContent>
+
+
+
+      <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
+          
           {/*<IonButton onClick={() => createShout({username:getEmail(), shouttext:shouttext, longitude: -1.2323, latitude: 1.98774 })}>SHOUT YOUR FAKE LOCATION</IonButton>*/}
        
           <IonButton onClick={() => createShoutGPS(shouttext)}>SHOUT YOUR LOCATION</IonButton>
 
-
       </IonFooter>
-
 
 
     </IonPage>
