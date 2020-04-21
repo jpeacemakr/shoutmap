@@ -10,36 +10,6 @@ export function useFirebase() {
 
 
   const [email, setEmail] = useState<string>();
-
-/*
-//does not update when switching between tabs. only when loading.
-
-  const [email, setEmail] = useState<string>(() => {
-    console.log("SETTING EMAIL");
-    let user = firebase.auth().currentUser;
-    if (user != null) {
-      if (user.email != null) {
-            return user.email;
-      } 
-    }
-    return " ";
-  })
-
-
-
-  useEffect(() => {
-  
-    let user = firebase.auth().currentUser;
-    if (user != null) {
-      if (user.email != null) {
-            setEmail(user.email);
-      } 
-    }
-  })
-
-*/
-
-
   const [password, setPassword] = useState<string>();
 
 
@@ -67,12 +37,24 @@ export function useFirebase() {
   const getUser = firebase.auth().currentUser;
 
 
-  const getEmail = () => { return email; };
+  const getEmail = () => { 
+    if (getUser) {
+        console.log("getUser.email", getUser.email)
+        return getUser.email;
+    } else {
+      console.log("getUser is null")  
+      //return " "; 
+    };
+  }
+
+
   const getPassword = () => { return password; };
 
 
 
   return {
+    email,
+    password,
     userLogin,
     userLogout,
     logUser, 

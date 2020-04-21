@@ -67,7 +67,7 @@ const Tab2: React.FC = () => {
 
   const { userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
 
-  const { shoutPost, shoutRead, getShouttextlist, getShoutlist } = useShout();
+  const { shoutRead, getShouttextlist, getShoutlist } = useShout();
 
 
 
@@ -79,13 +79,6 @@ const Tab2: React.FC = () => {
     return 1;
 
   }
-
-
-  //loads the json from the api. Can't do this in main render or I get an error.
-  useEffect(() => {
-    console.log("Using effect. Running shoutRead.")
-    //shoutRead(0,0,0);
-  });
 
 
 
@@ -100,53 +93,13 @@ const Tab2: React.FC = () => {
       console.log("currentShoutList in displayShouts", currentShoutList);
       console.log("currentShoutTextList in displayShouts", currentShoutTextList);
 
-      
-
-/*
-      if (currentShoutList == undefined ) {
-        console.log("shoutlist is null");
-        return;
-
-      } else {
-        let superList = "<tr><th>Email</th></tr>";
-
-        /*
-        for (const currentSupersearch of currentShoutList){
-              superList = superList + "<tr><td>" + currentSupersearch.username + "</td></tr>";
-        }*/
-
-        //return superList;
-        //converts html string to jsx
-  //      return(<><table className="container" dangerouslySetInnerHTML={{__html: superList}}></table></>);
-  //    }
+    
     }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*  interface Shout {
-    _id: string;
-    username: string;
-    longitude: number;
-    latitude: number;
-    shouttext: string;
-    date: string;
-    time: string;
-  }*/
 
 
   return (
@@ -159,6 +112,9 @@ const Tab2: React.FC = () => {
 
       <IonContent>
 
+         <IonButton onClick={() => logUser()}>Log the user to the console</IonButton>
+         <IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>
+         <IonButton onClick={() => shoutRead(0,0,0)}>Load shouts</IonButton>
 
            <p>
            { getShouttextlist() }
@@ -180,9 +136,6 @@ const Tab2: React.FC = () => {
 
          
 
-         <IonButton onClick={() => logUser()}>Log the user to the console</IonButton>
-         <IonButton onClick={() => logUserOnPush()}>Log the user to the console</IonButton>
-         <IonButton onClick={() => shoutRead(0,0,0)}>Load shouts</IonButton>
 
 
 

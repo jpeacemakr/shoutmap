@@ -1,25 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonInput, IonTextarea, IonPage, IonTitle, IonToolbar, IonFooter, IonButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
+
+import { useFirebase } from '../hooks/useFirebase';
 import { useShout } from '../hooks/useShout';
-import { createShout } from '../lib/utils';
+//import { useGPS } from '../hooks/useGPS';
+
 
 
 
 const Tab3: React.FC = () => {
 
-  const { shoutPost, shoutRead } = useShout();
-  const [email, setEmail] = useState<string>();
+  const { shouttext, getShouttext, createShout, setShouttext } = useShout();
+  const { getUser, getEmail } = useFirebase();
+  //const { getGPSlongitude, getGPSlatitude, newGPS } = useGPS();
 
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle>Shout your location {email}</IonTitle>
+          <IonTitle>Shout your location {getEmail()}</IonTitle>
         </IonToolbar>
       </IonHeader>
       
@@ -32,9 +36,14 @@ const Tab3: React.FC = () => {
       </IonContent>
 
       <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
-               
-          <textarea rows={5} style={{width:"100%"}} />
-          <IonButton onClick={() => createShout({username:"jpeacemakr@yahoo.com"})}>SHOUT YOUR LOCATION</IonButton>
+          
+     
+          {/*<IonInput value={getShouttext()} placeholder='Type your shout here.' type='text' onIonChange={e => setShouttext(e.detail.value!)} ></IonInput>*/}
+
+          <IonTextarea rows={8} value={shouttext} placeholder='Type your shout here.' onIonChange={e => setShouttext(e.detail.value!)} ></IonTextarea>
+
+
+          <IonButton onClick={() => createShout({username:getEmail(), shouttext:shouttext, longitude: -1.2323, latitude: 1.98774 })}>SHOUT YOUR LOCATION</IonButton>
        
       </IonFooter>
 

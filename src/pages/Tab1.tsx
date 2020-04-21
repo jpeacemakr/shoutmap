@@ -13,7 +13,7 @@ import { useShout } from '../hooks/useShout';
 
 const Tab1: React.FC = () => {
 
-  const { userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
+  const { email, password, userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
   //const { shoutPost, shoutRead } = useShout();
 
   
@@ -42,13 +42,13 @@ const Tab1: React.FC = () => {
         
         <>
         Email address:
-        <IonInput value={getEmail()} placeholder='Email' type='email' onIonChange={e => setEmail(e.detail.value!)} ></IonInput>
+        <IonInput value={email} placeholder='Email' type='email' onIonChange={e => setEmail(e.detail.value!)} ></IonInput>
         <br />
         Password:
-        <IonInput value={getPassword()} placeholder='Password' type='password' onIonChange={e => setPassword(e.detail.value!)}></IonInput>
-        <IonButton onClick={() => userLogin(getEmail(), getPassword())}>Log in</IonButton>
+        <IonInput value={password} placeholder='Password' type='password' onIonChange={e => setPassword(e.detail.value!)}></IonInput>
+        <IonButton onClick={() => userLogin(email, password)}>Log in</IonButton>
         <IonButton onClick={() => userLogout()}>Log out</IonButton>
-        <IonButton onClick={() => userCreate(getEmail(), getPassword())}>Create user</IonButton>
+        <IonButton onClick={() => userCreate(email, password)}>Create user</IonButton>
         </>
         
 
