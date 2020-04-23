@@ -23,7 +23,7 @@ export function useShout() {
   //also saves a text version to shoutlisttest. for testing purposes.
   //makes a get request to the api
   const shoutRead = async (longValue:any, latValue:any, distanceValue:any) => {
-    var url = `http://localhost/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
+    var url = `/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
     var shoutText = " ";
 
     var shoutToReturn = await fetch(url)
