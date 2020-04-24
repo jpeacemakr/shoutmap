@@ -1,9 +1,14 @@
+//import helmet from "helmet";
+
 const Express = require("express");
 const Mongoose = require("mongoose");
 const BodyParser = require("body-parser");
+var cors = require('cors')
 
 
 var app = Express();
+app.use(cors());
+
 
 Mongoose.connect("mongodb+srv://shoutmapadmin:shoutmappass@cluster0-mkagc.mongodb.net/shoutmap?retryWrites=true&w=majority");
 
@@ -19,6 +24,7 @@ const ShoutModel = Mongoose.model("shout", {
 
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
+// allow all origins // not working
 
 
 

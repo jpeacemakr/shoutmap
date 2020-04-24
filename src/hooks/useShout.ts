@@ -23,7 +23,9 @@ export function useShout() {
   //also saves a text version to shoutlisttest. for testing purposes.
   //makes a get request to the api
   const shoutRead = async (longValue:any, latValue:any, distanceValue:any) => {
-    var url = `/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
+//    var url = `/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
+    var url = `http://localhost:3000/api/allshouts?longitude=${longValue}+lat=${latValue}+dist=${distanceValue}`;
+  
     var shoutText = " ";
 
     var shoutToReturn = await fetch(url)
@@ -76,7 +78,8 @@ const createShout = (shout_info:any) => {
   
   console.log("searchParams", searchParams);  
 
-  return fetch("/api/newshout", {
+  return fetch("http://localhost:3000/api/newshout", {
+//  return fetch("/api/newshout", {
     method: "POST",
     headers: header,
     body: searchParams

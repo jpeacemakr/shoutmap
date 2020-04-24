@@ -76,5 +76,75 @@ then "apt-get install nginx"
 -- start nginx with "sudo nginx"
 -- check status of all services with "service --status-all"
 
+sudo service nginx restart
+
+
 -- check status of pm2
 pm2 status
+
+
+
+build production server??
+ionic build --prod
+
+
+
+
+chrome://flags/#unsafely-treat-insecure-origin-as-secure
+
+http://35.236.233.53/
+
+//uses pm2 to serve the build folder
+//run in the shoutmap folder so it can find build
+pm2 serve build
+
+
+
+
+CORS
+.......................
+import express from "express";
+import helmet from "helmet";
+
+let app = express();
+// ...
+// other configs
+// deny all framing
+app.use(
+  helmet(
+    {
+      frameguard: "deny"
+    }
+  )
+)
+
+// only allow SAMEORIGIN
+app.use(
+  helmet(
+    {
+      frameguard: "sameorigin"
+    }
+  )
+)
+
+// allow from one domain
+app.use(
+  helmet(
+    {
+      action: "allow-from",
+      domain: "http://example.com"
+    }
+  )
+)
+
+// allow all origins // not working
+app.use(helmet({
+  frameguard: {
+    action: "allow-from",
+    domain: "*"
+  }
+}))
+
+// other configs
+// ...
+
