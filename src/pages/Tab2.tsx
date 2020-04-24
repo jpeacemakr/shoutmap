@@ -83,7 +83,7 @@ const Tab2: React.FC = () => {
                 <b>{item.username}:</b>  
                 <i>(longitude: {item.longitude},  
                 latitude: {item.latitude}, 
-                {item.time} {item.date}):</i><br /> 
+                time: {item.time}, {item.date}):</i><br /> 
                 {item.shouttext} 
                 </li>)) }</ul>
 

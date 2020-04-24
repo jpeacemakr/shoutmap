@@ -107,13 +107,17 @@ const createShoutGPS = async (shoutString:string) => {
 
   var tempGPS = await Geolocation.getCurrentPosition(); //get GPS location
 
+  var today = new Date();
+  var todayDate = (today.getMonth()+1)+ '-' + today.getDate() + '-' + today.getFullYear();
+  var todayTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
   const shoutInfo = { 
     username: getEmail(),
     shouttext: shoutString,
     longitude: tempGPS.coords.longitude.toString(),
     latitude: tempGPS.coords.latitude.toString(),
-    date: "Dec 12, 2019", 
-    time: "12:34 a.m."
+    date: todayDate, 
+    time: todayTime
   }
   console.log("shoutInfo", shoutInfo);  
 
