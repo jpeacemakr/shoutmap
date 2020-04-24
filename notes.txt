@@ -103,48 +103,10 @@ pm2 serve build
 
 CORS
 .......................
-import express from "express";
-import helmet from "helmet";
+on api side
 
-let app = express();
-// ...
-// other configs
-// deny all framing
-app.use(
-  helmet(
-    {
-      frameguard: "deny"
-    }
-  )
-)
+const Express = require("express");
+var cors = require('cors')
 
-// only allow SAMEORIGIN
-app.use(
-  helmet(
-    {
-      frameguard: "sameorigin"
-    }
-  )
-)
-
-// allow from one domain
-app.use(
-  helmet(
-    {
-      action: "allow-from",
-      domain: "http://example.com"
-    }
-  )
-)
-
-// allow all origins // not working
-app.use(helmet({
-  frameguard: {
-    action: "allow-from",
-    domain: "*"
-  }
-}))
-
-// other configs
-// ...
-
+var app = Express();
+app.use(cors());

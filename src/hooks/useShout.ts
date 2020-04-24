@@ -122,7 +122,8 @@ const createShoutGPS = async (shoutString:string) => {
   const searchParams = new URLSearchParams(shoutInfo);
   console.log("searchParams", searchParams);  
 
-  return fetch("/api/newshout", {
+  //return fetch("/api/newshout", {
+  return fetch("http://localhost:3000/api/newshout", {  
     method: "POST",
     headers: header,
     body: searchParams
