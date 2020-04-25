@@ -12,7 +12,7 @@ import { useShout } from '../hooks/useShout';
 
 const Tab3: React.FC = () => {
 
-  const { shouttext, getShouttext, createShout, setShouttext, createShoutGPS } = useShout();
+  const { shouttext, getShouttext, createShout, setShouttext, createShoutGPS, createShoutGPSWithToken } = useShout();
   const { getUser, getEmail } = useFirebase();
   //const { getGPSlongitude, getGPSlatitude, newGPS } = useGPS();
 
@@ -46,7 +46,9 @@ const Tab3: React.FC = () => {
           
           {/*<IonButton onClick={() => createShout({username:getEmail(), shouttext:shouttext, longitude: -1.2323, latitude: 1.98774 })}>SHOUT YOUR FAKE LOCATION</IonButton>*/}
        
-          <IonButton onClick={() => createShoutGPS(shouttext)}>SHOUT YOUR LOCATION</IonButton>
+          {/*<IonButton onClick={() => createShoutGPS(shouttext)}>SHOUT YOUR LOCATION</IonButton>*/}
+
+          <IonButton onClick={() => createShoutGPSWithToken(shouttext)}>SHOUT YOUR LOCATION WITH TOKEN</IonButton>
 
       </IonFooter>
 

@@ -110,3 +110,48 @@ var cors = require('cors')
 
 var app = Express();
 app.use(cors());
+
+
+/////////////
+firebase interaction
+https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
+
+
+
+
+CLIENT SIDE
+/////////////////////send token
+ firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+    // Send token to your backend via HTTPS
+    // ...
+  }).catch(function(error) {
+    // Handle error
+  });
+
+
+
+
+
+API SIDE
+//////////////////
+var admin = require("firebase-admin");
+
+//need to change this line
+var serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://cpsc-225-241503.firebaseio.com"
+});
+
+////////////////
+check token
+
+// idToken comes from the client app
+admin.auth().verifyIdToken(idToken)
+  .then(function(decodedToken) {
+    let uid = decodedToken.uid;
+    // ...
+  }).catch(function(error) {
+    // Handle error
+  });

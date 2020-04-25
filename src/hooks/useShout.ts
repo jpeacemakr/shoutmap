@@ -142,6 +142,73 @@ const createShoutGPS = async (shoutString:string) => {
 
 
 
+
+
+//retrieves the GPS coordinates and user's email then posts the message to mongodb.
+//makes a post request to the api
+const createShoutGPSWithToken = async (shoutString:string) => {
+
+
+  //create the json for the post rquest, starting with the header, then add body
+  const header = {
+    Accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded"
+  };
+
+  var tempGPS = await Geolocation.getCurrentPosition(); //get GPS location
+
+  //swap out token with logged in user's username
+  //have to rework to check for null
+  //var userToken = await firebase.auth().currentUser.getIdToken(true);//get current logged in user's token
+  var userToken = "";
+  var user = await firebase.auth().currentUser;//get current logged in user's token
+  console.log("user", user);
+
+  if (user) {
+    if (user.getIdToken(true)){ 
+      userToken = await user.getIdToken(true);
+      console.log("userToken", userToken);
+    }
+  }
+
+  var today = new Date();
+  var todayDate = (today.getMonth()+1)+ '-' + today.getDate() + '-' + today.getFullYear();
+  var todayTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+  const shoutInfo = { 
+    username: userToken,
+    shouttext: shoutString,
+    longitude: tempGPS.coords.longitude.toString(),
+    latitude: tempGPS.coords.latitude.toString(),
+    date: todayDate, 
+    time: todayTime
+  }
+  console.log("shoutInfo", shoutInfo);  
+
+
+  //send the post request
+  const searchParams = new URLSearchParams(shoutInfo);
+  console.log("searchParams", searchParams);  
+
+  //return fetch("/api/newshout", {
+  return fetch("http://localhost:3000/api/newshoutwithtoken", {  
+    method: "POST",
+    headers: header,
+    body: searchParams
+
+  }).then(function(resp) {
+    var shoutReturn = resp.json();
+    console.log("returning json", shoutReturn);
+    return shoutReturn;
+  });
+}
+
+
+
+
+
+
+
   const getShouttext = () => { return shouttext; };
 
 
@@ -155,6 +222,7 @@ const createShoutGPS = async (shoutString:string) => {
 
     createShout,
     createShoutGPS,
+    createShoutGPSWithToken,
 
     getShouttext, 
     setShouttext
