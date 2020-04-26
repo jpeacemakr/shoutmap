@@ -1,7 +1,7 @@
 //this is a hook that uses firebase to log in, log out, creater users and retrieve user info
 
 import * as firebase from 'firebase';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function useFirebase() {
 
@@ -30,7 +30,7 @@ export function useFirebase() {
   };
 
   //logs the user to the console. used for testing purposes only
-  const logUser = () => { console.log(firebase.auth().currentUser); };
+  const logUser = () => { console.log(firebase.auth().currentUser); return firebase.auth().currentUser; };
   
   //returns the user Object
   const getUser = firebase.auth().currentUser;
@@ -43,11 +43,11 @@ export function useFirebase() {
         return getUser.email;
       } else {
         console.log("getUser.email is null")  
-        return "User not found"; 
+        return "Not logged in"; 
       }
     } else {
       console.log("getUser is null")  
-      return "User not found"; 
+      return "Not logged in"; 
     };
   }
 

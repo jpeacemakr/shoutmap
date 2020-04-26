@@ -7,13 +7,8 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs
+  IonTabs 
 } from '@ionic/react';
-
-
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem } from '@ionic/react';
-
-
 
 import { IonReactRouter } from '@ionic/react-router';
 import { create, people, search } from 'ionicons/icons';

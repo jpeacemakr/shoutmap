@@ -1,40 +1,36 @@
-//import React from 'react';
-//import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React from 'react';
 
-import React, { useState, useEffect } from 'react';
-
-import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 
-import { IonButton, IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, 
-         IonFab, IonFabButton, IonIcon, IonGrid, IonRow, 
-         IonCol, IonImg, IonActionSheet } from '@ionic/react';
-
+import { IonButton, 
+  IonContent, 
+  IonHeader, 
+  IonFooter, 
+  IonPage, 
+  IonTitle, 
+  IonToolbar } from '@ionic/react';
 
 import { useShout } from '../hooks/useShout';
 import { useFirebase } from '../hooks/useFirebase';
 
-//needed for map function to work
-import { map } from 'rxjs/operators';
-
-
 
 const Tab2: React.FC = () => {
 
-  const { userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
-  const { shoutRead, getShouttextlist, getShoutlist } = useShout();
+  const { getEmail } = useFirebase();
+  const { shoutRead, 
+    //getShouttextlist, 
+    getShoutlist } = useShout();
 
 
   //logs user email to console. for testing only.
-  function logUserOnPush () {
+  /*function logUserOnPush () {
     console.log(getEmail());
     return 1;
-  }
-
+  }*/
 
 
   //logs shout list to console. for testing only.
-  function displayShouts ()
+  /*function displayShouts ()
     {
       
       let currentShoutList = getShoutlist();
@@ -42,7 +38,7 @@ const Tab2: React.FC = () => {
 
       console.log("currentShoutList in displayShouts", currentShoutList);
       console.log("currentShoutTextList in displayShouts", currentShoutTextList);
-    }
+    }*/
 
 
 

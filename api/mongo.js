@@ -43,6 +43,7 @@ app.get("/api/hello", async (request, response) => {
 
 
 //adds a new shout but does not validate anything.
+/* 
 app.post("/api/newshout", async (request, response) => {
     try {
         var shout = new ShoutModel(request.body);
@@ -52,33 +53,30 @@ app.post("/api/newshout", async (request, response) => {
         response.status(500).send(error);
     }
 });
-
+*/
 
 
 //adds a new shout
 app.post("/api/newshoutwithtoken", async (request, response) => {
     try {
         var shout = new ShoutModel(request.body);
-
-        var sentTokenID = shout.username;
+                
+        var decodedToken = await admin.auth().verifyIdToken(shout.username);
         
-        var decodedToken = await admin.auth().verifyIdToken(sentTokenID);
-
         //////////////////////////////////////////////////
         //need to check if token is valid and don't post a message if this is the case
 
-        console.log("decodedToken", decodedToken)
+        console.log("decodedToken", decodedToken);
 
         var decodedEmail = decodedToken.email;
-
+        
         console.log("decodedEmail", decodedEmail)
 
         shout.username = decodedEmail;
 
         var result = await shout.save();
+        
         response.send(result);
-    
-
 
     } catch (error) {
         response.status(500).send(error);
@@ -90,7 +88,7 @@ app.post("/api/newshoutwithtoken", async (request, response) => {
 
 
 
-//returns all people
+//returns all shouts
 app.get("/api/allshouts", async (request, response) => {
     try {
         var result = await ShoutModel.find().exec();

@@ -1,24 +1,37 @@
 import React from 'react';
-import { IonContent, IonHeader, IonFabButton, IonInput, IonPage, IonTitle, IonToolbar, IonMenu, IonList, IonItem, IonRouterOutlet,  IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonSearchbar, IonButton, IonFooter } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, 
+  IonHeader, 
+  IonInput, 
+  IonPage, 
+  IonTitle, 
+  IonToolbar, 
+  IonButton, 
+  IonFooter } from '@ionic/react';
 import { useFirebase } from '../hooks/useFirebase';
 import './Tab1.css';
 
-import { useShout } from '../hooks/useShout';
 
 
 const Tab1: React.FC = () => {
 
-  const { email, password, userLogin, userLogout, userCreate, logUser, getUser, getEmail, setEmail, getPassword, setPassword } = useFirebase();
-  //const { shoutPost, shoutRead } = useShout();
-
+  const { email, 
+    password, 
+    userLogin, 
+    userLogout, 
+    userCreate, 
+    getEmail,
+    //logUser, 
+    setEmail, 
+    setPassword } = useFirebase();
+  
   
   //used for testing purposes only
-  function logUserOnPush () {
+  /* function logUserOnPush () {
     console.log(getEmail());
     return 1;
-  }
+  }*/
 
+  var userEmail = getEmail();
 
 
   return (
@@ -28,7 +41,7 @@ const Tab1: React.FC = () => {
       <IonHeader>
 
         <IonToolbar  color="primary">
-          <IonTitle>Log in/Log out: {getEmail()}</IonTitle>
+          <IonTitle>Log in/Log out: {userEmail}</IonTitle>
         </IonToolbar>
 
       </IonHeader>
@@ -62,9 +75,11 @@ const Tab1: React.FC = () => {
 
       <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
 
-        <IonButton onClick={() => userLogin(email, password)}>Log in</IonButton>
-        <IonButton onClick={() => userLogout()}>Log out</IonButton>
-        <IonButton onClick={() => userCreate(email, password)}>Create user</IonButton>
+        <IonButton onClick={ () => userLogin(email, password) }>Log in</IonButton>
+        <IonButton onClick={ () => { userLogout() } }>Log out</IonButton>
+        <IonButton onClick={ () => { userCreate(email, password) } }>Create user</IonButton>
+        {/*<IonButton onClick={ () => { userEmail = getEmail();} }>Update Email Test</IonButton>*/}
+
 
       </IonFooter>
 

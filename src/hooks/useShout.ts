@@ -1,7 +1,7 @@
 //this is a hook that is used to list shouts and post shouts using GPS coordinates
 
 import * as firebase from 'firebase';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFirebase } from '../hooks/useFirebase';
 import { Plugins } from '@capacitor/core';
 
@@ -14,7 +14,7 @@ export function useShout() {
   var [shoutlisttext, setShoutlisttext] = useState(); //the list of shouts in text form. for testing only
   var [shouttext, setShouttext] = useState(); //the text of the shoutbeing posted
 
-  const { getUser, getEmail } = useFirebase(); //used to retrieve the user email address
+  const { getEmail } = useFirebase(); //used to retrieve the user email address
 
   const { Geolocation } = Plugins;
 
@@ -48,6 +48,8 @@ export function useShout() {
 
       });
   
+    return shoutToReturn;
+
   };
 
 
@@ -158,7 +160,6 @@ const createShoutGPSWithToken = async (shoutString:string) => {
   var tempGPS = await Geolocation.getCurrentPosition(); //get GPS location
 
   //swap out token with logged in user's username
-  //have to rework to check for null
   //var userToken = await firebase.auth().currentUser.getIdToken(true);//get current logged in user's token
   var userToken = "";
   var user = await firebase.auth().currentUser;//get current logged in user's token
