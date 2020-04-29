@@ -21,7 +21,6 @@ app.use(cors());
 console.log("mongoAccount.url", mongoAccount.url);
 Mongoose.connect(mongoAccount.url);
 
-//Mongoose.connect("mongodb+srv://shoutmapadmin:shoutmappass@cluster0-mkagc.mongodb.net/shoutmap?retryWrites=true&w=majority");
 
 //set the model for a shout
 const ShoutModel = Mongoose.model("shout", {
