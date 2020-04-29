@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IonContent, 
+  IonAlert, 
   IonHeader, 
   IonInput, 
   IonPage, 
@@ -32,6 +33,10 @@ const Tab1: React.FC = () => {
   }*/
 
   var userEmail = getEmail();
+
+  const [showAlert1, setShowAlert1] = useState(false);
+  const [showAlert2, setShowAlert2] = useState(false);
+
 
 
   return (
@@ -75,9 +80,27 @@ const Tab1: React.FC = () => {
 
       <IonFooter style={{textAlign:"center", background:"#99CCFF", padding:"15px"}}>
 
-        <IonButton onClick={ () => userLogin(email, password) }>Log in</IonButton>
-        <IonButton onClick={ () => { userLogout() } }>Log out</IonButton>
-        <IonButton onClick={ () => { userCreate(email, password) } }>Create user</IonButton>
+
+      <IonAlert
+          isOpen={showAlert1}
+          onDidDismiss={() => setShowAlert1(false)}
+          header={'Logging in ...' }
+          buttons={['OK']}
+      />
+
+
+      <IonAlert
+          isOpen={showAlert2}
+          onDidDismiss={() => setShowAlert2(false)}
+          header={'Logging out ...'}
+          buttons={['OK']}
+      />
+
+
+
+        <IonButton onClick={ () => { userLogin(email, password); userEmail = getEmail(); setShowAlert1(true) }}>Log in</IonButton>
+        <IonButton onClick={ () => { userLogout(); setShowAlert2(true)} }>Log out</IonButton>
+        <IonButton onClick={ () => { userCreate(email, password); userEmail = getEmail(); setShowAlert1(true) } }>Create user</IonButton>
         {/*<IonButton onClick={ () => { userEmail = getEmail();} }>Update Email Test</IonButton>*/}
 
 
