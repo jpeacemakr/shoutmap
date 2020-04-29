@@ -35,6 +35,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 
 
+
 //returns hello
 app.get("/api/hello", async (request, response) => {
     response.send("Hello world!");
@@ -56,6 +57,7 @@ app.post("/api/newshout", async (request, response) => {
 */
 
 
+
 //adds a new shout
 app.post("/api/newshoutwithtoken", async (request, response) => {
     try {
@@ -63,14 +65,11 @@ app.post("/api/newshoutwithtoken", async (request, response) => {
                 
         var decodedToken = await admin.auth().verifyIdToken(shout.username);
         
-        //////////////////////////////////////////////////
-        //need to check if token is valid and don't post a message if this is the case
-
-        console.log("decodedToken", decodedToken);
+        //console.log("decodedToken", decodedToken);
 
         var decodedEmail = decodedToken.email;
         
-        console.log("decodedEmail", decodedEmail)
+        //console.log("decodedEmail", decodedEmail)
 
         shout.username = decodedEmail;
 
