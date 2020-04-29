@@ -6,7 +6,9 @@ const BodyParser = require("body-parser");
 var cors = require('cors')
 
 var admin = require("firebase-admin");
-var serviceAccount = require("../src/environment/cpsc-225-241503-firebase-adminsdk-8dgfl-6028865996.json");
+var serviceAccount = require("../src/environment/cpsc-225-241503-firebase-adminsdk-8dgfl-6028865996.json"); //stores firebase api password
+var mongoAccount = require("../src/environment/mongopass.json"); //stores mongo db access password so it is not checked in to git
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -16,8 +18,10 @@ admin.initializeApp({
 var app = Express();
 app.use(cors());
 
+console.log("mongoAccount.url", mongoAccount.url);
+Mongoose.connect(mongoAccount.url);
 
-Mongoose.connect("mongodb+srv://shoutmapadmin:shoutmappass@cluster0-mkagc.mongodb.net/shoutmap?retryWrites=true&w=majority");
+//Mongoose.connect("mongodb+srv://shoutmapadmin:shoutmappass@cluster0-mkagc.mongodb.net/shoutmap?retryWrites=true&w=majority");
 
 //set the model for a shout
 const ShoutModel = Mongoose.model("shout", {
@@ -108,7 +112,7 @@ app.get("/api/getshouts", async (request, response) => {
     const distance = req.query.distance;
     
     //////////////////////////////////////////////////
-    //need to modify to refine mongo search paramaters
+    //need to modify to refine mongo search paramaters if I want to show shouts closest to the user
 
     try {
         var result = await ShoutModel.find().exec();
